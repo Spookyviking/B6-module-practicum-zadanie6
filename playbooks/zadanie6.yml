@@ -1,0 +1,11 @@
+   - name: users_role, http_role for nginx_server
+     hosts: nginx_server
+     roles:
+       - users_role
+       - http_role
+
+   - name: users_role, php_role for php_fpm_server
+     hosts: nginx_server
+     roles:
+       - users_role
+       - php_role

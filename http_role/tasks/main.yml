@@ -1,0 +1,27 @@
+---
+# tasks file for http
+
+- name: Install Nginx packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nginx
+
+- name: Copy Nginx configuration file
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx services
+
+- name: Copy index.php file
+  template:
+    src: templates/index.php.j2
+#    dest: /var/www/html/index.php
+    dest: /opt/nginx/ansible/index.php
+    owner: root
+    group: root
+    mode: '0644'

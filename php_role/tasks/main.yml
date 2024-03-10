@@ -1,0 +1,18 @@
+---
+# tasks file for php
+
+- name: Install PHP-FPM packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php-fpm
+
+- name: Copy PHP-FPM configuration file
+  template:
+    src: php_fpm_pool.conf.j2
+    dest: /etc/php/8.2/fpm/pool.d/www.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart PHP-FPM

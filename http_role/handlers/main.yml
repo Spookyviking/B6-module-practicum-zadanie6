@@ -1,0 +1,9 @@
+---
+# handlers file for http
+
+- name: Restart Nginx services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - nginx
